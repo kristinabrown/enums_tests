@@ -15,7 +15,7 @@ class SortByTest < Minitest::Test
   def test_sort_alphabetically_by_last_letter
     things = ["pill", "box", "glass", "water", "sponge"]
     sorted = things.sort_by do |thing|
-      # Your code goes here
+      thing.reverse
     end
     assert_equal ["sponge", "pill", "water", "glass", "box"], sorted
   end
