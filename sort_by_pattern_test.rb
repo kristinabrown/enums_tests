@@ -36,7 +36,7 @@ class SortByPatternTest < Minitest::Test
     distances = ["1cm", "9cm", "30cm", "4cm", "2cm"]
     transformed = []
     distances.each do |distance|
-      transformed << distance.delete("cm")
+      transformed << [distance.delete("cm").to_i, distance]
     end
     transformed = transformed.sort
     sorted = []
@@ -47,9 +47,16 @@ class SortByPatternTest < Minitest::Test
   end
 
   def test_sort_by_length
-    skip
     words = ["heteromorph", "ancyloceratina", "bioengineering", "mathematical", "bug"]
-    # Your code goes here
+    transformed = []
+    words.each do |word|
+      transformed << [word.length, word]
+    end
+    transformed = transformed.sort
+    sorted = []
+    transformed.each do |sort_key, bug|
+      sorted << bug
+    end
     assert_equal ["bug", "heteromorph", "mathematical", "ancyloceratina", "bioengineering"], sorted
   end
 
