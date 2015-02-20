@@ -61,16 +61,36 @@ class SortByPatternTest < Minitest::Test
   end
 
   def test_sort_by_proximity_to_ten
-    skip
     prices = [3.02, 9.91, 17.9, 10.01, 11.0]
-    # Your code goes here
+    transformed = []
+    prices.each do |price|
+      if price > 10
+        diff = price - 10
+      else
+        diff = 10 - price
+      end
+      transformed << [diff, price]
+    end
+    transformed = transformed.sort
+    sorted = []
+    transformed.each do |sort_key, price|
+      sorted << price
+    end
     assert_equal [10.01, 9.91, 11.0, 3.02, 17.9], sorted
   end
 
   def test_sort_by_number_of_cents
-    skip
     prices = [3.02, 9.91, 7.9, 10.01, 11.0]
-    # Your code goes here
+    transformed = []
+    prices.each do |price|
+      cents = price.inspect.reverse
+      transformed << [cents, price.to_f]
+    end
+    transformed = transformed.sort
+    sorted = []
+    transformed.each do |sort_key, price|
+      sorted << price
+    end
     assert_equal [11.0, 10.01, 3.02, 7.9, 9.91], sorted
   end
 
